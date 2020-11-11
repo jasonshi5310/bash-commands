@@ -17,14 +17,7 @@ then
 fi
 
 # Copy all the .c file from the src dir that are outside of subdir
-# find $1 -maxdepth 1 -type f -name *.c -exec cp {} $2 \;
-
-
 local count=($( ls -1 $1 | grep -c ".*\.c$" ))
-
-# echo "count: $count"
-# ls -1 $s
-# ls -1 $s | grep -c ".*\.c$"
 if [ $count -gt 2 ]
 then
     # echo "greater than 3! $s"
@@ -51,7 +44,6 @@ mv_recursive()
     else
         find $s -maxdepth 1 -type f -name "*.c" -exec mv {} $d \;
     fi
-    # find $s -maxdepth 1 -type f -name "*.c" -exec cp {} $d \;
     for dir in $s/*
     do
         if [ -d $s/${dir##*/} ]
@@ -59,8 +51,6 @@ mv_recursive()
             # echo "Create subdir $d/${dir##*/}"
             mkdir $d/${dir##*/}
             mv_recursive $s/${dir##*/} $d/${dir##*/}
-        # else
-        #     echo $s/${dir##*/}
         fi
     done
     #cd ..
