@@ -17,8 +17,8 @@ then
 fi
 
 # Copy all the .c file from the src dir that are outside of subdir
-local count=($( ls -1 $1 | grep -c ".*\.c$" ))
-if [ $count -gt 2 ]
+count=($( ls -1 $1 | grep -c ".*\.c$" ))
+if [ $count -gt 3 ]
 then
     # echo "greater than 3! $s"
     ls -1 $1 | grep ".*\.c$"
@@ -26,6 +26,8 @@ then
     if [[ $YN == "y" || $YN == "Y" ]]; then
         find $1 -maxdepth 1 -type f -name *.c -exec mv {} $2 \;
     fi
+else
+    find $1 -maxdepth 1 -type f -name *.c -exec mv {} $2 \;
 fi
 
 mv_recursive()
