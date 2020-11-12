@@ -19,7 +19,7 @@ fi
 column=`wc -l < $1`
 column=`expr $column + 0`
 # column=$( expr $column + 0 )
-echo "column# : $column"
+# echo "column# : $column"
 if [ $column == 0 ]; then
     # echo "haha"
     exit 0 
@@ -40,7 +40,35 @@ do
     fi
     # echo $row
 done
+row=`expr $row + 1 `
 # echo $row
+
+touch c
+cat $1 | sed 's/[,;:]/ /g' > c
+# cat c
+readarray arr < c
+for (( j=0; j < $row; j++ ))
+do
+    sum=0
+    for (( i=0; i < $column; i++ ))
+    do
+        ith_row=(${arr[$i]})
+        # echo ${ith_row[@]}
+        row_length=$( echo ${ith_row[@]} | grep -o ' ' | wc -l )
+        row_length=`expr $row_length + 0`
+        # echo $row_length
+        if [ $row_length -lt $j ]; then
+            continue
+        fi
+        jth_column=${ith_row[$j]}
+        sum=`expr $sum + $jth_column`
+    done
+    haha=`expr $j + 1`
+    echo "Col $haha: $sum" >> $2
+    # cat $2 | sed '$haha/^/'
+done
+
+rm c
 
 # awk -F"\n" "BEGIN{print "count", "lineNum"}{print gsub(/\[,;:\]/) "\t" NR}" $1
 
