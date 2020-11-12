@@ -10,7 +10,7 @@ fi
 
 for file in $1/*
 do
-    echo "$file:"
+    # echo "$file:"
     cat $file | sed 's/,/ /g' > no_files_have_this_name_4
     readarray arr < no_files_have_this_name_4
     rm no_files_have_this_name_4
@@ -23,15 +23,16 @@ do
         # echo $temp
         sum=`expr $sum + $temp`
     done 
-    echo $sum
+    # echo $sum
+    id=(${points[0]})
     sum=`expr $sum \* 2`
     if [ $sum -gt 92 ]; then
-        echo "A"
+        echo "$id:A"
     elif [ $sum -gt 79 ]; then
-        echo "B"
+        echo "$id:B"
     elif [ $sum -gt 65 ]; then
-        echo "C"
+        echo "$id:C"
     else
-        echo "D"
+        echo "$id:D"
     fi
 done
