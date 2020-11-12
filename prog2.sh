@@ -43,10 +43,11 @@ done
 row=`expr $row + 1 `
 # echo $row
 
-touch c
-cat $1 | sed 's/[,;:]/ /g' > c
-# cat c
-readarray arr < c
+touch no_files_have_this_name
+cat $1 | sed 's/[,;:]/ /g' > no_files_have_this_name
+# cat no_files_have_this_name
+readarray arr < no_files_have_this_name
+rm no_files_have_this_name
 for (( j=0; j < $row; j++ ))
 do
     sum=0
@@ -67,23 +68,3 @@ do
     echo "Col $haha: $sum" >> $2
     # cat $2 | sed '$haha/^/'
 done
-
-rm c
-
-# awk -F"\n" "BEGIN{print "count", "lineNum"}{print gsub(/\[,;:\]/) "\t" NR}" $1
-
-# awk -F'\n' 'BEGIN{print "count", "lineNum"}{print gsub(/[,:;]/,"") "\t" NR}' $1
-
-# row=-1
-# echo $row
-# awk -F'\n' '{$row = gsub(/[,:;]/,"")}' $1
-# echo $row
-
-# read the input
-
-
-# count the column
-
-# count the row
-
-# do a double for loop
